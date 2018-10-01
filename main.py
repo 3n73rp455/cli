@@ -33,13 +33,17 @@ def main():
     parser = argparse.ArgumentParser(description='Access enterPass API via Command Line')
     parser.add_argument('endpoint', type=str, help='What API endpoint to access')
     parser.add_argument('method', type=str, help='What method to call')
+    parser.add_argument('username', type=str, help='Username')
+    parser.add_argument('password', type=str, help='Password')
     args = parser.parse_args()
 
     endpoint = args.endpoint
     method = args.method
+    user = args.username
+    password = args.passwor
 
-    pw = getattr(CLI(user='robin',
-                     password='Welcome2',
+    pw = getattr(CLI(user=user,
+                     password=password,
                      endpoint=endpoint), method)(pk=1)
 
     print(pw)
