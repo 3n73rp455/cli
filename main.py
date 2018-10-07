@@ -15,7 +15,6 @@ class CLI(object):
         return
 
     def get(self, pk):
-        pk = 1
         pw = get.password(token=self.token, pk=pk)
         return pw
 
@@ -31,20 +30,22 @@ class CLI(object):
 
 def main():
     parser = argparse.ArgumentParser(description='Access enterPass API via Command Line')
-    parser.add_argument('endpoint', type=str, help='What API endpoint to access')
-    parser.add_argument('method', type=str, help='What method to call')
-    parser.add_argument('username', type=str, help='Username')
-    parser.add_argument('password', type=str, help='Password')
+    parser.add_argument('--endpoint', required=True, type=str, help='What API endpoint to access')
+    parser.add_argument('--method', required=True, type=str, help='What method to call')
+    parser.add_argument('--pk', type=int, help='Primary Key for Object')
+    parser.add_argument('--username', type=str, help='Username')
+    parser.add_argument('--password', type=str, help='Password')
     args = parser.parse_args()
 
     endpoint = args.endpoint
     method = args.method
+    pk = args.pk
     user = args.username
-    password = args.passwor
+    password = args.password
 
     pw = getattr(CLI(user=user,
                      password=password,
-                     endpoint=endpoint), method)(pk=1)
+                     endpoint=endpoint), method)(pk=pk)
 
     print(pw)
 
